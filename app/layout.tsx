@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import './globals.css';
 
-const playfair = Playfair_Display({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-playfair',
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta',
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -19,6 +19,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Invitación de Boda - Andrés Felipe & María Isabel',
   description: 'Invitación de boda de Andrés Felipe Rubio Castro y María Isabel Marín - 17 de Mayo de 2026',
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export const viewport: Viewport = {
@@ -32,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="es" className={`${plusJakarta.variable} ${inter.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );

@@ -40,7 +40,6 @@ export const guestList: string[] = [
   'Mariana',
   'Salomé',
   'Jefferson',
-  
   // Agrega más nombres aquí
 ];
 

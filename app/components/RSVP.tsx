@@ -52,9 +52,9 @@ export default function RSVP() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-black text-white">
+    <section className="py-24 md:py-32 px-4 bg-black text-white">
       <div className="max-w-2xl mx-auto animate-slide-up">
-        <h2 className="font-serif text-4xl md:text-5xl text-center mb-12 md:mb-16">
+        <h2 className="font-sans text-4xl md:text-5xl font-bold text-center mb-16 md:mb-24">
           Confirmación de Asistencia
         </h2>
 
@@ -63,7 +63,7 @@ export default function RSVP() {
             <p className="text-gold text-lg font-semibold">
               ¡Gracias por tu confirmación!
             </p>
-            <p className="text-gold-light text-sm mt-2">
+            <p className="text-gold-light text-sm mt-2 tracking-widest font-sans">
               Tu respuesta ha sido registrada exitosamente.
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function RSVP() {
           <div>
             <label
               htmlFor="name"
-              className="block text-gold-light text-sm mb-2 uppercase tracking-wider"
+              className="block text-gold-light text-sm mb-2 uppercase tracking-widest font-sans"
             >
               Nombre Completo
             </label>
@@ -91,7 +91,7 @@ export default function RSVP() {
           </div>
 
           <div>
-            <label className="block text-gold-light text-sm mb-4 uppercase tracking-wider">
+            <label className="block text-gold-light text-sm mb-4 uppercase tracking-widest font-sans">
               ¿Asistirás a nuestra boda?
             </label>
             <div className="flex gap-4">
@@ -108,7 +108,7 @@ export default function RSVP() {
                   className="sr-only"
                 />
                 <span
-                  className={`px-6 py-3 border border-gold text-center transition-all ${
+                  className={`px-6 py-3 border border-gold text-center transition-all tracking-widest font-sans ${
                     formData.attending === 'yes'
                       ? 'bg-gold text-black'
                       : 'text-gold hover:bg-gold/10'
@@ -130,7 +130,7 @@ export default function RSVP() {
                   className="sr-only"
                 />
                 <span
-                  className={`px-6 py-3 border border-gold text-center transition-all ${
+                  className={`px-6 py-3 border border-gold text-center transition-all tracking-widest font-sans ${
                     formData.attending === 'no'
                       ? 'bg-gold text-black'
                       : 'text-gold hover:bg-gold/10'
@@ -145,7 +145,7 @@ export default function RSVP() {
           <div>
             <label
               htmlFor="dietary"
-              className="block text-gold-light text-sm mb-2 uppercase tracking-wider"
+              className="block text-gold-light text-sm mb-2 uppercase tracking-widest font-sans"
             >
               Restricciones Alimentarias
             </label>
@@ -168,7 +168,7 @@ export default function RSVP() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 bg-gold text-black font-semibold hover:bg-gold-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider"
+            className="w-full py-4 bg-gold text-black font-semibold hover:bg-gold-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest font-sans"
           >
             {isSubmitting ? 'Enviando...' : 'Confirmar Asistencia'}
           </button>

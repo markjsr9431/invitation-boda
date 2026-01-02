@@ -37,16 +37,16 @@ export default function GiftRegistry() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-white">
+    <section className="py-24 md:py-32 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-serif text-4xl md:text-5xl text-center mb-4">
+        <h2 className="font-sans text-4xl md:text-5xl font-bold text-center mb-6">
           Mesa de Regalos
         </h2>
-        <p className="text-center text-gray-600 mb-12 md:mb-16 text-sm md:text-base">
+        <p className="text-center text-gray-600 mb-16 md:mb-24 text-sm md:text-base tracking-widest font-sans">
           Tu presencia es el mejor regalo, pero si deseas obsequiarnos algo especial
         </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12">
           {gifts.map((gift, index) => (
             <div
               key={gift.id}
@@ -56,20 +56,20 @@ export default function GiftRegistry() {
               {/* Placeholder para imagen */}
               <div className="aspect-[4/3] bg-gold-light flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gold-light to-gold-dark opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <span className="font-serif text-2xl md:text-3xl text-black/30 z-10 group-hover:text-black/40 transition-colors">
+                <span className="font-sans text-2xl md:text-3xl font-bold text-black/30 z-10 group-hover:text-black/40 transition-colors">
                   {gift.title}
                 </span>
               </div>
               
-              <div className="p-6 bg-white">
-                <h3 className="font-serif text-2xl md:text-3xl mb-4">
+              <div className="p-8 bg-white">
+                <h3 className="font-sans text-2xl md:text-3xl font-bold mb-6">
                   {gift.title}
                 </h3>
                 <a
                   href={gift.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block w-full text-center border border-black px-6 py-3 text-black hover:bg-black hover:text-white transition-all duration-300 text-sm uppercase tracking-wider"
+                  className="inline-block w-full text-center border border-black px-6 py-3 text-black hover:bg-black hover:text-white transition-all duration-300 text-sm uppercase tracking-widest font-sans"
                 >
                   Regalar
                 </a>
