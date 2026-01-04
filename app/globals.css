@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
   --font-inter: 'Inter', sans-serif;
 }
 
@@ -22,8 +22,8 @@ body {
 
 body {
   color: #000;
-  background: #fff;
-  font-family: var(--font-plus-jakarta);
+  background: #F9F7F2;
+  font-family: var(--font-montserrat);
   letter-spacing: -0.01em;
 }
 
@@ -62,5 +62,88 @@ body {
 
 .animate-slide-up {
   animation: slide-up 0.6s ease-out;
+}
+
+/* Animación del sobre */
+@keyframes envelope-slide-out {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes newspaper-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-envelope-slide-out {
+  animation: envelope-slide-out 0.8s ease-in forwards;
+}
+
+.animate-newspaper-reveal {
+  animation: newspaper-reveal 1s ease-out 0.3s both;
+}
+
+/* Animaciones para sobre abriéndose */
+@keyframes envelope-open-top {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-100%) rotate(-5deg);
+  }
+}
+
+@keyframes envelope-open-bottom {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(100%) rotate(5deg);
+  }
+}
+
+@keyframes invitation-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-envelope-open-top {
+  animation: envelope-open-top 0.8s ease-out forwards;
+}
+
+.animate-envelope-open-bottom {
+  animation: envelope-open-bottom 0.8s ease-out forwards;
+}
+
+.animate-invitation-reveal {
+  animation: invitation-reveal 1s ease-out 0.5s both;
+}
+
+/* Ocultar scrollbar para carrusel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 

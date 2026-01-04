@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { calculateTimeRemaining, TimeRemaining } from '@/app/utils/countdown';
+import Image from 'next/image';
 
 export default function Hero() {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(
@@ -21,73 +22,110 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 bg-black text-white animate-fade-in">
-      <div className="text-center max-w-4xl mx-auto">
-        {/* Nombres de los novios */}
-        <div className="mb-12 space-y-6 animate-slide-up">
-          <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase">
-            andrés felipe
-          </h1>
-          <div className="flex items-center justify-center gap-6 my-6">
-            <div className="h-px w-20 md:w-32 bg-gold"></div>
-            <span className="text-gold text-xl md:text-2xl font-sans font-light">&</span>
-            <div className="h-px w-20 md:w-32 bg-gold"></div>
+    <section className="bg-paper-cream animate-newspaper-reveal">
+      {/* Cabecera del Periódico (The Masthead) */}
+      <div className="bg-white border-b border-black">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-lavender">
+            {/* Columna Izquierda */}
+            <div className="px-4 md:px-8 py-6 md:py-8">
+              <p className="text-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest mb-2">
+                EDICIÓN ESPECIAL
+              </p>
+              <p className="text-black text-xs md:text-sm font-sans font-normal uppercase tracking-wider">
+                Cali, Colombia
+              </p>
+            </div>
+
+            {/* Columna Centro */}
+            <div className="px-4 md:px-8 py-6 md:py-8 flex items-center justify-center">
+              <h1 className="text-black font-sans font-black text-3xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tight leading-tight text-center">
+                ANDRÉS & MARÍA
+              </h1>
+            </div>
+
+            {/* Columna Derecha */}
+            <div className="px-4 md:px-8 py-6 md:py-8 flex items-center justify-end">
+              <p className="text-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-right">
+                17 DE MAYO<br />DE 2026
+              </p>
+            </div>
           </div>
-          <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase">
-            maría isabel
-          </h1>
         </div>
+      </div>
 
-        {/* Fecha */}
-        <p className="text-gold text-lg md:text-xl mb-16 tracking-widest font-sans font-light">
-          17 de Mayo de 2026
-        </p>
+      {/* Titular Principal */}
+      <div className="bg-white border-b border-black py-8 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <h2 className="text-black font-sans font-black text-5xl md:text-7xl lg:text-8xl xl:text-9xl uppercase tracking-tight leading-none">
+            ¡NOS CASAMOS!
+          </h2>
+        </div>
+      </div>
 
-        {/* Countdown Timer */}
-        <div className="mt-16">
-          <p className="text-gold-light text-sm md:text-base mb-6 tracking-widest uppercase font-sans">
-            Faltan
-          </p>
-          <div className="grid grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto">
-            <div className="flex flex-col items-center">
-              <div className="w-full aspect-square border border-gold flex items-center justify-center mb-2 transition-all hover:bg-gold/10">
-                <span className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold">
-                  {formatNumber(timeRemaining.days)}
+      {/* Imagen Hero con efecto blanco y negro */}
+      <div className="bg-white border-b border-black">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+          <div className="relative w-full aspect-[4/3] border border-black overflow-hidden bg-paper-cream">
+            <Image
+              src="/IMG_9536.JPG"
+              alt="Andrés y María"
+              fill
+              className="object-cover grayscale"
+              priority
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Contador estilo Anuncio Clasificado */}
+      <div className="bg-white border-b border-black py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          <div className="border-2 border-black p-8 md:p-12 bg-paper-cream">
+            <p className="text-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest mb-6 text-center">
+              Faltan
+            </p>
+            <div className="grid grid-cols-4 gap-4 md:gap-6">
+              <div className="flex flex-col items-center">
+                <div className="w-full aspect-square border-2 border-eucalyptus bg-white flex items-center justify-center mb-3">
+                  <span className="font-sans text-4xl md:text-6xl lg:text-7xl font-black text-black">
+                    {formatNumber(timeRemaining.days)}
+                  </span>
+                </div>
+                <span className="text-black text-xs md:text-sm uppercase tracking-widest font-sans font-bold">
+                  Días
                 </span>
               </div>
-              <span className="text-gold-light text-xs md:text-sm uppercase tracking-widest font-sans">
-                Días
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-full aspect-square border border-gold flex items-center justify-center mb-2 transition-all hover:bg-gold/10">
-                <span className="font-serif text-3xl md:text-5xl lg:text-6xl font-light">
-                  {formatNumber(timeRemaining.hours)}
+              <div className="flex flex-col items-center">
+                <div className="w-full aspect-square border-2 border-eucalyptus bg-white flex items-center justify-center mb-3">
+                  <span className="font-sans text-4xl md:text-6xl lg:text-7xl font-black text-black">
+                    {formatNumber(timeRemaining.hours)}
+                  </span>
+                </div>
+                <span className="text-black text-xs md:text-sm uppercase tracking-widest font-sans font-bold">
+                  Horas
                 </span>
               </div>
-              <span className="text-gold-light text-xs md:text-sm uppercase tracking-widest font-sans">
-                Horas
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-full aspect-square border border-gold flex items-center justify-center mb-2 transition-all hover:bg-gold/10">
-                <span className="font-serif text-3xl md:text-5xl lg:text-6xl font-light">
-                  {formatNumber(timeRemaining.minutes)}
+              <div className="flex flex-col items-center">
+                <div className="w-full aspect-square border-2 border-eucalyptus bg-white flex items-center justify-center mb-3">
+                  <span className="font-sans text-4xl md:text-6xl lg:text-7xl font-black text-black">
+                    {formatNumber(timeRemaining.minutes)}
+                  </span>
+                </div>
+                <span className="text-black text-xs md:text-sm uppercase tracking-widest font-sans font-bold">
+                  Minutos
                 </span>
               </div>
-              <span className="text-gold-light text-xs md:text-sm uppercase tracking-widest font-sans">
-                Minutos
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-full aspect-square border border-gold flex items-center justify-center mb-2 transition-all hover:bg-gold/10">
-                <span className="font-serif text-3xl md:text-5xl lg:text-6xl font-light">
-                  {formatNumber(timeRemaining.seconds)}
+              <div className="flex flex-col items-center">
+                <div className="w-full aspect-square border-2 border-eucalyptus bg-white flex items-center justify-center mb-3">
+                  <span className="font-sans text-4xl md:text-6xl lg:text-7xl font-black text-black">
+                    {formatNumber(timeRemaining.seconds)}
+                  </span>
+                </div>
+                <span className="text-black text-xs md:text-sm uppercase tracking-widest font-sans font-bold">
+                  Segundos
                 </span>
               </div>
-              <span className="text-gold-light text-xs md:text-sm uppercase tracking-widest font-sans">
-                Segundos
-              </span>
             </div>
           </div>
         </div>
@@ -95,4 +133,3 @@ export default function Hero() {
     </section>
   );
 }
-

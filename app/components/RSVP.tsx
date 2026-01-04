@@ -39,7 +39,6 @@ export default function RSVP() {
           attending: '',
           dietaryRestrictions: '',
         });
-        // Ocultar mensaje de éxito después de 5 segundos
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
         setError('Error al enviar la confirmación. Por favor intenta de nuevo.');
@@ -52,28 +51,30 @@ export default function RSVP() {
   };
 
   return (
-    <section className="py-24 md:py-32 px-4 bg-black text-white">
-      <div className="max-w-2xl mx-auto animate-slide-up">
-        <h2 className="font-sans text-4xl md:text-5xl font-bold text-center mb-16 md:mb-24">
-          Confirmación de Asistencia
-        </h2>
+    <section className="py-16 md:py-24 px-4 bg-white border-t border-black">
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-rose-palo border border-black p-8 md:p-12 mb-12">
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-tight">
+            Confirmación de Asistencia
+          </h2>
+        </div>
 
         {isSuccess && (
-          <div className="mb-8 p-6 border border-gold bg-gold/10 text-center animate-fade-in">
-            <p className="text-gold text-lg font-semibold">
+          <div className="mb-8 p-6 border-2 border-eucalyptus bg-peach animate-fade-in">
+            <p className="text-black text-lg font-sans font-black uppercase tracking-widest text-center">
               ¡Gracias por tu confirmación!
             </p>
-            <p className="text-gold-light text-sm mt-2 tracking-widest font-sans">
+            <p className="text-black text-sm mt-2 tracking-widest font-sans font-medium text-center">
               Tu respuesta ha sido registrada exitosamente.
             </p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-black p-8 md:p-12">
           <div>
             <label
               htmlFor="name"
-              className="block text-gold-light text-sm mb-2 uppercase tracking-widest font-sans"
+              className="block text-black text-xs mb-2 uppercase tracking-widest font-sans font-bold"
             >
               Nombre Completo
             </label>
@@ -85,17 +86,17 @@ export default function RSVP() {
                 setFormData({ ...formData, name: e.target.value })
               }
               required
-              className="w-full px-4 py-3 bg-transparent border border-gold text-white placeholder:text-gold-light focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+              className="w-full px-4 py-3 bg-white border border-black text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-eucalyptus transition-all font-sans"
               placeholder="Tu nombre completo"
             />
           </div>
 
           <div>
-            <label className="block text-gold-light text-sm mb-4 uppercase tracking-widest font-sans">
+            <label className="block text-black text-xs mb-4 uppercase tracking-widest font-sans font-bold">
               ¿Asistirás a nuestra boda?
             </label>
             <div className="flex gap-4">
-              <label className="flex items-center cursor-pointer group">
+              <label className="flex items-center cursor-pointer group flex-1">
                 <input
                   type="radio"
                   name="attending"
@@ -108,16 +109,16 @@ export default function RSVP() {
                   className="sr-only"
                 />
                 <span
-                  className={`px-6 py-3 border border-gold text-center transition-all tracking-widest font-sans ${
+                  className={`w-full px-6 py-3 border-2 border-black text-center transition-all tracking-widest font-sans font-bold text-sm uppercase ${
                     formData.attending === 'yes'
-                      ? 'bg-gold text-black'
-                      : 'text-gold hover:bg-gold/10'
+                      ? 'bg-black text-white'
+                      : 'bg-white text-black hover:bg-peach'
                   }`}
                 >
                   Sí, asistiré
                 </span>
               </label>
-              <label className="flex items-center cursor-pointer group">
+              <label className="flex items-center cursor-pointer group flex-1">
                 <input
                   type="radio"
                   name="attending"
@@ -130,10 +131,10 @@ export default function RSVP() {
                   className="sr-only"
                 />
                 <span
-                  className={`px-6 py-3 border border-gold text-center transition-all tracking-widest font-sans ${
+                  className={`w-full px-6 py-3 border-2 border-black text-center transition-all tracking-widest font-sans font-bold text-sm uppercase ${
                     formData.attending === 'no'
-                      ? 'bg-gold text-black'
-                      : 'text-gold hover:bg-gold/10'
+                      ? 'bg-black text-white'
+                      : 'bg-white text-black hover:bg-peach'
                   }`}
                 >
                   No podré asistir
@@ -145,7 +146,7 @@ export default function RSVP() {
           <div>
             <label
               htmlFor="dietary"
-              className="block text-gold-light text-sm mb-2 uppercase tracking-widest font-sans"
+              className="block text-black text-xs mb-2 uppercase tracking-widest font-sans font-bold"
             >
               Restricciones Alimentarias
             </label>
@@ -156,19 +157,19 @@ export default function RSVP() {
                 setFormData({ ...formData, dietaryRestrictions: e.target.value })
               }
               rows={4}
-              className="w-full px-4 py-3 bg-transparent border border-gold text-white placeholder:text-gold-light focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all resize-none"
+              className="w-full px-4 py-3 bg-white border border-black text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-eucalyptus transition-all resize-none font-sans"
               placeholder="Ej: Vegetariano, sin gluten, alergias, etc. (opcional)"
             />
           </div>
 
           {error && (
-            <p className="text-red-400 text-sm">{error}</p>
+            <p className="text-red-600 text-sm font-sans">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 bg-gold text-black font-semibold hover:bg-gold-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest font-sans"
+            className="w-full py-4 bg-black text-white font-sans font-black hover:bg-gray-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-sm border-2 border-black"
           >
             {isSubmitting ? 'Enviando...' : 'Confirmar Asistencia'}
           </button>
@@ -177,4 +178,3 @@ export default function RSVP() {
     </section>
   );
 }
-

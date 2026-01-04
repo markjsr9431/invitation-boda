@@ -40,7 +40,32 @@ export const guestList: string[] = [
   'Mariana',
   'Salomé',
   'Jefferson',
-  // Agrega más nombres aquí
+  'Lorena',
+  'Luis',
+  'Sebastián',
+  'Tania',
+  'Liliana Castro',
+  'Henry',
+  'David',
+  'Sandra',
+  'Ximena',
+  'Pablo Sierra',
+  'Alejandra Charris',
+  'Andrea Jordan',
+  'Sergio',
+  'Olga Lucia Torres',
+  'Gilberto',
+  'Natalia Mondragón',
+  'Deyci',
+  'Daniel',
+  'Julián Sarria',
+  'William',
+  'Patricia Beltrán',
+  'Jessica',
+  'Cony',
+  'Diego',
+  'Mónica',
+  'Michael',// Agrega más nombres aquí
 ];
 
 // Función para verificar si un nombre está en la lista (case-insensitive)
