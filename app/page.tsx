@@ -7,6 +7,7 @@ import Hero from './components/Hero';
 import Location from './components/Location';
 import RSVP from './components/RSVP';
 import GiftRegistry from './components/GiftRegistry';
+import MusicPlayer from './components/MusicPlayer';
 
 export default function Home() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -35,11 +36,15 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-paper-cream">
+    <main className="min-h-screen bg-[#F9F7F2]">
       <Hero />
       <Location />
       <RSVP />
       <GiftRegistry />
+      {/* MusicPlayer - Descomentar y configurar con tu playlist/video de YouTube */}
+      {/* <MusicPlayer playlistId="TU_PLAYLIST_ID_AQUI" /> */}
+      {/* O para un video único: */}
+      {/* <MusicPlayer videoId="TU_VIDEO_ID_AQUI" /> */}
     </main>
   );
 }
