@@ -5,6 +5,8 @@
 :root {
   --font-montserrat: 'Montserrat', sans-serif;
   --font-inter: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --color-coffee-deep: #3E2723;
 }
 
 * {
@@ -22,7 +24,7 @@ body {
 
 body {
   color: #000;
-  background: #F9F7F2;
+  background: #FDF5E6;
   font-family: var(--font-montserrat);
   letter-spacing: -0.01em;
 }
@@ -95,22 +97,61 @@ body {
   animation: newspaper-reveal 1s ease-out 0.3s both;
 }
 
-/* Animaciones para sobre abriéndose */
-@keyframes envelope-open-top {
+/* Animaciones 3D para sobre abriéndose */
+@keyframes envelope-3d-open-top {
   from {
-    transform: translateY(0) rotate(0deg);
+    transform: perspective(1000px) rotateX(0deg);
   }
   to {
-    transform: translateY(-100%) rotate(-5deg);
+    transform: perspective(1000px) rotateX(180deg);
   }
 }
 
-@keyframes envelope-open-bottom {
+@keyframes envelope-3d-open-bottom {
   from {
-    transform: translateY(0) rotate(0deg);
+    transform: perspective(1000px) rotateX(0deg);
   }
   to {
-    transform: translateY(100%) rotate(5deg);
+    transform: perspective(1000px) rotateX(120deg);
+  }
+}
+
+@keyframes envelope-blur {
+  from {
+    filter: blur(0px);
+  }
+  to {
+    filter: blur(4px);
+  }
+}
+
+@keyframes card-spring-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  60% {
+    transform: translateY(-10px) scale(1.02);
+  }
+  80% {
+    transform: translateY(5px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes card-slide-out {
+  from {
+    opacity: 0;
+    transform: translateY(0) scale(0.9);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -125,12 +166,25 @@ body {
   }
 }
 
-.animate-envelope-open-top {
-  animation: envelope-open-top 0.8s ease-out forwards;
+.animate-envelope-3d-open-top {
+  animation: envelope-3d-open-top 0.8s ease-out forwards;
+  transform-origin: top;
 }
 
-.animate-envelope-open-bottom {
-  animation: envelope-open-bottom 0.8s ease-out forwards;
+.animate-envelope-3d-open-bottom {
+  animation: envelope-3d-open-bottom 0.8s ease-out forwards;
+}
+
+.animate-envelope-blur {
+  animation: envelope-blur 0.6s ease-out forwards;
+}
+
+.animate-card-spring-up {
+  animation: card-spring-up 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
+}
+
+.animate-card-slide-out {
+  animation: card-slide-out 0.8s ease-out 0.4s both;
 }
 
 .animate-invitation-reveal {
@@ -145,5 +199,26 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Mejorar touch para carrusel */
+.touch-pan-x {
+  touch-action: pan-x;
+}
+
+/* Clases utilitarias para diseño moderno */
+.shadow-soft {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.border-subtle {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 

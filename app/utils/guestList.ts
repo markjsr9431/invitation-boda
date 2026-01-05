@@ -32,7 +32,7 @@ export const guestList: string[] = [
   'Jorge Villafañe',
   'Melany Solarte',
   'Nora Estefanía Rodríguez',
-  'Estefanía Quiroga',
+  'Steffanía Quiroga',
   'Carlos Camacho',
   'Valentina Morales',
   'Sebastián Trejos',
@@ -65,7 +65,16 @@ export const guestList: string[] = [
   'Cony',
   'Diego',
   'Mónica',
-  'Michael',// Agrega más nombres aquí
+  'Michael',
+  'Lorena Ayala Marín',
+  'Sebastián Vega',
+  'Victoria Delgado',
+  'William Toro',
+  'Martha Liliana Urrea',
+  'Caroline Vidal',
+  'Walter Marín',
+  'Johana Barrantes',
+  // Agrega más nombres aquí
 ];
 
 // Función para verificar si un nombre está en la lista (case-insensitive)

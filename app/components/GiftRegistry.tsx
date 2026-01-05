@@ -21,7 +21,7 @@ export default function GiftRegistry() {
   const gifts: GiftItem[] = REGALOS.map((regalo) => ({
     id: regalo.id.toString(),
     title: regalo.nombre,
-    image: '/regalo-placeholder.jpg',
+    image: regalo.image,
     link: regalo.link,
     precio: regalo.precio,
   }));
@@ -54,11 +54,11 @@ export default function GiftRegistry() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-paper-cream border-t border-black">
+    <section className="py-16 md:py-24 px-4 bg-paper-cream">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-rose-palo border border-black p-8 md:p-12 mb-12 md:mb-16">
-          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-tight">
-            Lista de Deseos Editorial
+        <div className="bg-paper-cream p-8 md:p-12 mb-12 md:mb-16 rounded-[24px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 uppercase tracking-widest text-pastel-blue-title">
+            Lista de Deseos
           </h2>
           <p className="text-center text-black mb-0 text-sm md:text-base tracking-wide font-sans leading-relaxed">
             Tu presencia es el mejor regalo, pero si deseas obsequiarnos algo especial
@@ -70,19 +70,20 @@ export default function GiftRegistry() {
           {/* Flecha Izquierda */}
           <button
             onClick={() => scrollCarousel('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-rose-palo border border-black hover:bg-rose-palo/80 transition-all duration-300"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
             aria-label="Anterior"
           >
-            <span className="font-sans font-black text-2xl md:text-3xl text-black">‹</span>
+            <span className="font-sans font-bold text-2xl md:text-3xl text-pastel-pink">‹</span>
           </button>
           
           {/* Contenedor del Carrusel */}
           <div
             ref={carouselRef}
-            className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth"
+            className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
+              touchAction: 'pan-x',
             }}
           >
             <div className="flex gap-6 px-12 md:px-16">
@@ -92,9 +93,9 @@ export default function GiftRegistry() {
                   className="flex-shrink-0 w-[66vw] md:w-64 lg:w-72 snap-start"
                 >
                   {/* Tarjeta Portrait */}
-                  <div className="bg-lavender border border-eucalyptus overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                  <div className="bg-paper-cream rounded-[24px] overflow-hidden hover:-translate-y-2 transition-all duration-300 h-full flex flex-col" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
                     {/* Imagen en la parte superior */}
-                    <div className="relative aspect-[3/4] w-full border-b border-eucalyptus overflow-hidden bg-lavender">
+                    <div className="relative aspect-[3/4] w-full overflow-hidden">
                       <Image
                         src={gift.image}
                         alt={gift.title}
@@ -104,9 +105,9 @@ export default function GiftRegistry() {
                     </div>
                     
                     {/* Contenido de la tarjeta */}
-                    <div className="p-4 md:p-6 flex-1 flex flex-col justify-between bg-white">
+                    <div className="p-4 md:p-6 flex-1 flex flex-col justify-between bg-paper-cream">
                       <div>
-                        <h3 className="font-sans text-xl md:text-2xl font-black mb-2 uppercase tracking-tight">
+                        <h3 className="font-sans text-xl md:text-2xl font-bold mb-2 uppercase tracking-tight">
                           {gift.title}
                         </h3>
                         {gift.precio && (
@@ -117,7 +118,7 @@ export default function GiftRegistry() {
                       </div>
                       <button
                         onClick={() => handleOpenModal(gift.link)}
-                        className="w-full text-center border-2 border-eucalyptus bg-eucalyptus text-white px-4 py-2 md:px-6 md:py-3 hover:bg-black hover:text-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300 text-xs md:text-sm uppercase tracking-widest font-sans font-bold"
+                        className="w-full text-center bg-pastel-blue-title text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition-all duration-300 text-xs md:text-sm uppercase tracking-widest font-sans font-bold rounded-[50px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
                       >
                         Contribuir
                       </button>
@@ -131,10 +132,10 @@ export default function GiftRegistry() {
           {/* Flecha Derecha */}
           <button
             onClick={() => scrollCarousel('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-rose-palo border border-black hover:bg-rose-palo/80 transition-all duration-300"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
             aria-label="Siguiente"
           >
-            <span className="font-sans font-black text-2xl md:text-3xl text-black">›</span>
+            <span className="font-sans font-bold text-2xl md:text-3xl text-pastel-pink">›</span>
           </button>
         </div>
       </div>
@@ -149,23 +150,23 @@ export default function GiftRegistry() {
           <div className="absolute inset-0 bg-black/50"></div>
           
           {/* Modal */}
-          <div className="relative bg-lavender border-2 border-black max-w-md w-full p-8 md:p-12 animate-slide-up">
+          <div className="relative bg-paper-cream/95 backdrop-blur-md max-w-md w-full p-8 md:p-12 animate-slide-up rounded-[24px] shadow-soft border-subtle">
             {/* Botón de cerrar */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center border border-black bg-white hover:bg-black hover:text-white transition-all duration-300"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full shadow-soft"
               aria-label="Cerrar modal"
             >
-              <span className="font-sans font-black text-lg">×</span>
+              <span className="font-sans font-black text-lg text-black">×</span>
             </button>
             
             {/* Contenido del Modal */}
             <div className="space-y-6">
-              <h3 className="font-sans text-3xl md:text-4xl font-black uppercase tracking-tight text-center">
+              <h3 className="font-sans text-3xl md:text-4xl font-bold uppercase tracking-widest text-center text-pastel-blue-title">
                 Detalle para Andrés & María
               </h3>
               
-              <p className="font-sans text-base md:text-lg leading-relaxed text-center">
+              <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">
                 ¡Gracias por ser parte de nuestra historia! Para tu comodidad, hemos habilitado un portal seguro para recibir tu detalle.
               </p>
               
@@ -173,7 +174,7 @@ export default function GiftRegistry() {
                 href={selectedGiftLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full text-center bg-eucalyptus text-white px-6 py-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 text-sm md:text-base uppercase tracking-widest font-sans font-bold border-2 border-eucalyptus"
+                className="inline-block w-full text-center bg-pastel-blue-title text-white px-6 py-4 hover:opacity-90 transition-all duration-300 text-sm md:text-base uppercase tracking-widest font-sans font-bold rounded-[50px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
               >
                 Ir al portal seguro de regalos
               </a>
