@@ -56,86 +56,84 @@ export default function GiftRegistry() {
   return (
     <section className="py-16 md:py-24 px-4 bg-paper-cream">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-paper-cream p-8 md:p-12 mb-12 md:mb-16 rounded-[24px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
-          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 uppercase tracking-widest text-pastel-blue-title">
+        <div className="bg-pastel-blue-title p-8 md:p-12 mb-12 md:mb-16 rounded-[30px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 uppercase tracking-widest text-white">
             Lista de Deseos
           </h2>
-          <p className="text-center text-black mb-0 text-sm md:text-base tracking-wide font-sans leading-relaxed">
+          <p className="text-center text-white mb-0 text-sm md:text-base tracking-wide font-sans leading-relaxed">
             Tu presencia es el mejor regalo, pero si deseas obsequiarnos algo especial
           </p>
         </div>
         
-        {/* Carrusel de Regalos */}
+        {/* Carrusel de Regalos / Grid Móvil */}
         <div className="relative">
-          {/* Flecha Izquierda */}
+          {/* Flecha Izquierda - Solo visible en desktop */}
           <button
             onClick={() => scrollCarousel('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
             aria-label="Anterior"
           >
-            <span className="font-sans font-bold text-2xl md:text-3xl text-pastel-pink">‹</span>
+            <span className="font-sans font-bold text-3xl text-pastel-pink">‹</span>
           </button>
           
-          {/* Contenedor del Carrusel */}
+          {/* Contenedor: Grid en móvil, Carrusel en desktop */}
           <div
             ref={carouselRef}
-            className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth touch-pan-x"
+            className="grid grid-cols-2 gap-3 md:flex md:overflow-x-auto md:scrollbar-hide md:gap-6 md:px-16 md:snap-x md:snap-mandatory md:scroll-smooth md:touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               touchAction: 'pan-x',
             }}
           >
-            <div className="flex gap-6 px-12 md:px-16">
-              {gifts.map((gift) => (
-                <div
-                  key={gift.id}
-                  className="flex-shrink-0 w-[66vw] md:w-64 lg:w-72 snap-start"
-                >
-                  {/* Tarjeta Portrait */}
-                  <div className="bg-paper-cream rounded-[24px] overflow-hidden hover:-translate-y-2 transition-all duration-300 h-full flex flex-col" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
-                    {/* Imagen en la parte superior */}
-                    <div className="relative aspect-[3/4] w-full overflow-hidden">
-                      <Image
-                        src={gift.image}
-                        alt={gift.title}
-                        fill
-                        className="object-cover"
-                      />
+            {gifts.map((gift) => (
+              <div
+                key={gift.id}
+                className="w-full md:flex-shrink-0 md:w-64 lg:w-72 md:snap-start"
+              >
+                {/* Tarjeta Portrait */}
+                <div className="bg-paper-cream rounded-[24px] overflow-hidden md:hover:-translate-y-2 transition-all duration-300 h-full flex flex-col" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+                  {/* Imagen en la parte superior */}
+                  <div className="relative aspect-[3/4] w-full overflow-hidden">
+                    <Image
+                      src={gift.image}
+                      alt={gift.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* Contenido de la tarjeta */}
+                  <div className="p-3 md:p-6 flex-1 flex flex-col justify-between bg-paper-cream">
+                    <div>
+                      <h3 className="font-sans text-sm md:text-xl font-bold mb-2 uppercase tracking-tight">
+                        {gift.title}
+                      </h3>
+                      {gift.precio && (
+                        <p className="font-sans text-xs md:text-sm text-black/70 mb-4">
+                          {gift.precio}
+                        </p>
+                      )}
                     </div>
-                    
-                    {/* Contenido de la tarjeta */}
-                    <div className="p-4 md:p-6 flex-1 flex flex-col justify-between bg-paper-cream">
-                      <div>
-                        <h3 className="font-sans text-xl md:text-2xl font-bold mb-2 uppercase tracking-tight">
-                          {gift.title}
-                        </h3>
-                        {gift.precio && (
-                          <p className="font-sans text-sm md:text-base text-black/70 mb-4">
-                            {gift.precio}
-                          </p>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => handleOpenModal(gift.link)}
-                        className="w-full text-center bg-pastel-blue-title text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition-all duration-300 text-xs md:text-sm uppercase tracking-widest font-sans font-bold rounded-[50px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
-                      >
-                        Contribuir
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleOpenModal(gift.link)}
+                      className="w-full text-center bg-pastel-blue-title text-white px-3 py-1.5 md:px-6 md:py-3 hover:opacity-90 transition-all duration-300 text-xs md:text-sm uppercase tracking-widest font-sans font-bold rounded-[50px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
+                    >
+                      Contribuir
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
           
-          {/* Flecha Derecha */}
+          {/* Flecha Derecha - Solo visible en desktop */}
           <button
             onClick={() => scrollCarousel('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-full" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}
             aria-label="Siguiente"
           >
-            <span className="font-sans font-bold text-2xl md:text-3xl text-pastel-pink">›</span>
+            <span className="font-sans font-bold text-3xl text-pastel-pink">›</span>
           </button>
         </div>
       </div>
@@ -163,7 +161,7 @@ export default function GiftRegistry() {
             {/* Contenido del Modal */}
             <div className="space-y-6">
               <h3 className="font-sans text-3xl md:text-4xl font-bold uppercase tracking-widest text-center text-pastel-blue-title">
-                Detalle para Andrés & María
+                Detalle para Felipe & María
               </h3>
               
               <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">

@@ -41,27 +41,29 @@ export default function Hero() {
     <section className="bg-paper-cream animate-newspaper-reveal">
       {/* Cabecera Minimalista */}
       <div className="bg-paper-cream">
-        <div className="w-full max-w-full px-4 md:px-8 py-12 md:py-16">
-          <div className="flex flex-col items-center justify-center text-center space-y-3 md:space-y-4">
-            {/* Título Principal */}
-            <h1 className="text-pastel-blue-title font-sans font-bold text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-widest leading-tight">
-              ¡Nos casamos!
-            </h1>
+        <div className="w-full max-w-full px-4 md:px-8 py-12 md:py-16 flex justify-center">
+          <div className="w-full max-w-[90%] md:max-w-[500px] bg-pastel-blue-title py-[50px] px-[20px] rounded-[30px] mx-auto box-border overflow-hidden" style={{ height: 'auto', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+            <div className="flex flex-col items-center justify-center text-center space-y-3 md:space-y-4">
+              {/* Título Principal */}
+              <h1 className="text-white font-sans font-bold text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-wide leading-normal break-words animate-pulse-text">
+                ¡Nos casamos!
+              </h1>
 
-            {/* Subtítulo */}
-            <h2 className="text-pastel-pink font-sans font-semibold text-2xl md:text-4xl lg:text-5xl tracking-wide leading-tight">
-              Felipe y María
-            </h2>
+              {/* Subtítulo */}
+              <h2 className="text-white font-sans font-semibold text-2xl md:text-4xl lg:text-5xl tracking-wide leading-tight animate-pulse-text">
+                Felipe y María
+              </h2>
 
-            {/* Texto Informativo */}
-            <p className="text-black text-sm md:text-base font-sans font-normal tracking-normal">
-              ¿Cuándo?
-            </p>
+              {/* Texto Informativo */}
+              <p className="text-white text-sm md:text-base font-sans font-normal tracking-normal animate-breathing">
+                ¿Cuándo?
+              </p>
 
-            {/* Fecha */}
-            <p className="text-black text-lg md:text-xl lg:text-2xl font-sans font-bold uppercase tracking-wider">
-              17 de Mayo de 2026
-            </p>
+              {/* Fecha */}
+              <p className="text-white text-lg md:text-xl lg:text-2xl font-sans font-bold uppercase tracking-wider animate-breathing">
+                17 de Mayo de 2026
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -69,13 +71,14 @@ export default function Hero() {
       {/* Carrusel Hero Automático */}
       <div className="bg-paper-cream">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-          <div className="relative w-full max-w-2xl mx-auto aspect-[4/5] max-h-[500px] overflow-hidden bg-paper-cream rounded-[30px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+          <div className="relative w-full max-w-full md:max-w-[1200px] mx-auto aspect-[4/5] max-h-[800px] overflow-hidden bg-paper-cream rounded-[30px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
             <Image
               key={currentImageIndex}
               src={heroImages[currentImageIndex]}
               alt="Felipe y María"
               fill
               className="object-cover transition-opacity duration-1000"
+              style={{ objectPosition: 'center 15%' }}
               priority={currentImageIndex === 0}
             />
           </div>

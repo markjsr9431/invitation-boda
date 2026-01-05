@@ -6,8 +6,8 @@ export default function RSVP() {
   return (
     <section className="py-16 md:py-24 px-4 bg-paper-cream">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-paper-cream p-8 md:p-12 mb-12 rounded-[24px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
-          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 uppercase tracking-widest text-pastel-blue-title">
+        <div className="bg-pastel-blue-title p-8 md:p-12 mb-12 rounded-[30px]" style={{ boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)' }}>
+          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 uppercase tracking-widest text-white">
             Confirmación de Asistencia
           </h2>
         </div>
