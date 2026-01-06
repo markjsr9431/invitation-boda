@@ -3,7 +3,6 @@
 export const guestList: string[] = [
   'Andrés Felipe Rubio Castro',
   'María Isabel Marín',
-  'María Lorena Castro',
   'Rosa',
   'Belarmino',
   'José Sebastián Rubio',
@@ -74,6 +73,8 @@ export const guestList: string[] = [
   'Caroline Vidal',
   'Walter Marín',
   'Johana Barrantes',
+  'Martín Álvarez',
+  'Yolanda',
   // Agrega más nombres aquí
 ];
 

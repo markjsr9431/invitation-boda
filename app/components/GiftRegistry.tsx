@@ -75,7 +75,7 @@ export default function GiftRegistry() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-paper-cream">
+    <section className="py-16 md:py-24 px-4 bg-[#F9F7F2] border-b-2 border-black">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-2 border-black p-8 md:p-12 mb-12 md:mb-16">
           <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-widest text-black">
@@ -86,21 +86,21 @@ export default function GiftRegistry() {
           </p>
         </div>
         
-        {/* Carrusel de Regalos */}
+        {/* Grid de Regalos en Móvil / Carrusel en Desktop */}
         <div className="relative flex items-center gap-2 md:gap-4">
-          {/* Flecha Izquierda - Visible en todos los tamaños */}
+          {/* Flecha Izquierda - Solo visible en desktop */}
           <button
             onClick={() => scrollCarousel('left')}
-            className="flex w-12 h-12 md:w-16 md:h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+            className="hidden md:flex w-16 h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
             aria-label="Anterior"
           >
-            <span className="font-sans font-black text-3xl md:text-4xl text-black hover:text-white">‹</span>
+            <span className="font-sans font-black text-4xl text-black hover:text-white">‹</span>
           </button>
           
-          {/* Contenedor: Carrusel en todos los tamaños */}
+          {/* Contenedor: Grid en móvil, Carrusel en desktop */}
           <div
             ref={carouselRef}
-            className="flex-1 flex overflow-x-auto scrollbar-hide gap-3 md:gap-6 snap-x snap-mandatory scroll-smooth touch-pan-x"
+            className="flex-1 grid grid-cols-2 gap-3 md:flex md:overflow-x-auto md:scrollbar-hide md:gap-6 md:snap-x md:snap-mandatory md:scroll-smooth md:touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -111,10 +111,10 @@ export default function GiftRegistry() {
             {gifts.map((gift) => (
               <div
                 key={gift.id}
-                className="flex-shrink-0 w-[80vw] md:w-64 lg:w-72 snap-start"
+                className="w-full md:flex-shrink-0 md:w-64 lg:w-72 md:snap-start"
               >
                 {/* Tarjeta Portrait */}
-                <div className="bg-white border-2 border-black overflow-hidden md:hover:opacity-90 transition-opacity h-full flex flex-col">
+                <div className="bg-white border-2 border-black overflow-hidden md:hover:opacity-90 transition-opacity h-full flex flex-col" style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)' }}>
                   {/* Imagen en la parte superior */}
                   <div className="relative aspect-[3/4] w-full overflow-hidden">
                     <Image
@@ -126,20 +126,20 @@ export default function GiftRegistry() {
                   </div>
                   
                   {/* Contenido de la tarjeta */}
-                  <div className="p-3 md:p-6 flex-1 flex flex-col justify-between bg-white">
+                  <div className="p-2 md:p-6 flex-1 flex flex-col justify-between bg-white">
                     <div>
-                      <h3 className="font-sans text-sm md:text-xl font-bold mb-2 uppercase tracking-tight">
+                      <h3 className="font-sans text-xs md:text-xl font-bold mb-2 uppercase tracking-tight">
                         {gift.title}
                       </h3>
                       {gift.precio && (
-                        <p className="font-sans text-xs md:text-sm text-black/70 mb-4">
+                        <p className="font-sans text-xs text-black/70 mb-4">
                           {gift.precio}
                         </p>
                       )}
                     </div>
                     <button
                       onClick={() => handleOpenModal(gift.link)}
-                      className="w-full text-center bg-black text-white px-3 py-1.5 md:px-6 md:py-3 hover:opacity-90 transition-opacity text-xs md:text-sm uppercase tracking-widest font-sans font-black"
+                      className="w-full text-center bg-black text-white px-2 py-1 md:px-6 md:py-3 hover:opacity-90 transition-opacity text-xs md:text-sm uppercase tracking-widest font-sans font-black"
                     >
                       CONTRIBUIR
                     </button>
@@ -149,13 +149,13 @@ export default function GiftRegistry() {
             ))}
           </div>
           
-          {/* Flecha Derecha - Visible en todos los tamaños */}
+          {/* Flecha Derecha - Solo visible en desktop */}
           <button
             onClick={() => scrollCarousel('right')}
-            className="flex w-12 h-12 md:w-16 md:h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+            className="hidden md:flex w-16 h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
             aria-label="Siguiente"
           >
-            <span className="font-sans font-black text-3xl md:text-4xl text-black hover:text-white">›</span>
+            <span className="font-sans font-black text-4xl text-black hover:text-white">›</span>
           </button>
         </div>
       </div>
