@@ -9,7 +9,8 @@ interface MusicPlayerProps {
 }
 
 export default function MusicPlayer({ playlistId, videoId, isMuted: externalMuted }: MusicPlayerProps) {
-  const [isMuted, setIsMuted] = useState(false);
+  // Inicializar con el valor externo si está disponible, sino false
+  const [isMuted, setIsMuted] = useState(externalMuted !== undefined ? externalMuted : false);
   const [isVisible, setIsVisible] = useState(true);
 
   // Sincronizar con el estado externo si se proporciona

@@ -47,23 +47,26 @@ export default function GiftRegistry() {
       // Calcular el ancho de la tarjeta según el breakpoint
       let cardWidth: number;
       let gap: number;
+      let cardsToScroll: number;
       
       if (window.innerWidth >= 1024) {
         // lg: w-72 (288px)
         cardWidth = 288;
         gap = 24; // gap-6
+        cardsToScroll = 2;
       } else if (window.innerWidth >= 768) {
         // md: w-64 (256px)
         cardWidth = 256;
         gap = 24; // gap-6
+        cardsToScroll = 2;
       } else {
-        // móvil: w-[80vw]
-        cardWidth = window.innerWidth * 0.8;
+        // móvil: w-[48vw] para mostrar ~2 regalos
+        cardWidth = window.innerWidth * 0.48;
         gap = 12; // gap-3
+        // En móvil: pasar de 2 a 3 regalos por deslizamiento
+        cardsToScroll = 2; // Puede alternar entre 2 y 3 según preferencia
       }
       
-      // En desktop: pasar de a 2 tarjetas, en móvil: pasar de a 1 tarjeta
-      const cardsToScroll = window.innerWidth >= 768 ? 2 : 1;
       const scrollAmount = (cardWidth + gap) * cardsToScroll;
       const scrollDirection = direction === 'left' ? -scrollAmount : scrollAmount;
       
@@ -86,8 +89,8 @@ export default function GiftRegistry() {
           </p>
         </div>
         
-        {/* Grid de Regalos en Móvil / Carrusel en Desktop */}
-        <div className="relative flex items-center gap-2 md:gap-4">
+        {/* Carrusel de Regalos - Móvil y Desktop */}
+        <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
           {/* Flecha Izquierda - Solo visible en desktop */}
           <button
             onClick={() => scrollCarousel('left')}
@@ -97,21 +100,22 @@ export default function GiftRegistry() {
             <span className="font-sans font-black text-4xl text-black hover:text-white">‹</span>
           </button>
           
-          {/* Contenedor: Grid en móvil, Carrusel en desktop */}
+          {/* Contenedor: Carrusel en todos los tamaños */}
           <div
             ref={carouselRef}
-            className="flex-1 grid grid-cols-2 gap-3 md:flex md:overflow-x-auto md:scrollbar-hide md:gap-6 md:snap-x md:snap-mandatory md:scroll-smooth md:touch-pan-x"
+            className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide gap-3 md:gap-6 snap-x snap-mandatory scroll-smooth touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               touchAction: 'pan-x',
               scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
             }}
           >
             {gifts.map((gift) => (
               <div
                 key={gift.id}
-                className="w-full md:flex-shrink-0 md:w-64 lg:w-72 md:snap-start"
+                className="flex-shrink-0 w-[48vw] md:w-64 lg:w-72 snap-start"
               >
                 {/* Tarjeta Portrait */}
                 <div className="bg-white border-2 border-black overflow-hidden md:hover:opacity-90 transition-opacity h-full flex flex-col" style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)' }}>
