@@ -82,7 +82,7 @@ export default function GiftRegistry() {
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-2 border-black p-8 md:p-12 mb-12 md:mb-16">
           <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-widest text-black">
-            LISTA DE DESEOS EDITORIAL
+            LISTA DE DESEOS
           </h2>
           <p className="text-center text-black mb-0 text-sm md:text-base tracking-wide font-sans leading-relaxed">
             Tu presencia es el mejor regalo, pero si deseas obsequiarnos algo especial
@@ -103,11 +103,11 @@ export default function GiftRegistry() {
           {/* Contenedor: Carrusel en todos los tamaños */}
           <div
             ref={carouselRef}
-            className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide gap-3 md:gap-6 snap-x snap-mandatory scroll-smooth touch-pan-x"
+            className="flex-1 min-w-0 flex overflow-x-auto scrollbar-hide gap-3 md:gap-6 snap-x snap-mandatory scroll-smooth"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
-              touchAction: 'pan-x',
+              touchAction: 'pan-x pan-y',
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
             }}

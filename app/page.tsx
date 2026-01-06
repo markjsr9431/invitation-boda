@@ -45,8 +45,8 @@ export default function Home() {
           <Hero />
           <Location />
           <RSVP />
-          <GiftRegistry />
           <DressCode />
+          <GiftRegistry />
         </main>
       )}
     </>
