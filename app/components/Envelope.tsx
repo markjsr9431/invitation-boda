@@ -11,6 +11,7 @@ export default function Envelope({ onAccessGranted }: EnvelopeProps) {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [isChecking, setIsChecking] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +21,10 @@ export default function Envelope({ onAccessGranted }: EnvelopeProps) {
     setTimeout(() => {
       if (isAuthorizedGuest(name)) {
         localStorage.setItem('wedding_access', 'granted');
-        onAccessGranted();
+        setIsExiting(true);
+        setTimeout(() => {
+          onAccessGranted();
+        }, 400);
       } else {
         setError('Nombre no encontrado en la lista de invitados');
         setIsChecking(false);
@@ -29,7 +33,7 @@ export default function Envelope({ onAccessGranted }: EnvelopeProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-[#F9F7F2] z-50 flex items-center justify-center px-4">
+    <div className={`fixed inset-0 bg-[#F9F7F2] z-50 flex items-center justify-center px-4 ${isExiting ? 'animate-slide-out' : 'animate-slide-in'}`}>
       <div className="relative w-full max-w-md">
         <div className="relative bg-white border-2 border-black p-12 md:p-16">
           <form onSubmit={handleSubmit} className="space-y-6">

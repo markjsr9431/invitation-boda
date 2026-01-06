@@ -16,6 +16,8 @@ export default function Hero() {
     calculateTimeRemaining()
   );
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,11 +29,51 @@ export default function Hero() {
 
   useEffect(() => {
     const imageTimer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      // Fade out
+      setIsTransitioning(true);
+      setOpacity(0);
+      
+      setTimeout(() => {
+        // Cambiar imagen
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+        
+        // Fade in
+        setTimeout(() => {
+          setOpacity(1);
+          setIsTransitioning(false);
+        }, 50);
+      }, 350);
     }, 3000);
 
     return () => clearInterval(imageTimer);
   }, []);
+
+  const changeImage = (newIndex: number) => {
+    // Fade out
+    setIsTransitioning(true);
+    setOpacity(0);
+    
+    setTimeout(() => {
+      // Cambiar imagen
+      setCurrentImageIndex(newIndex);
+      
+      // Fade in
+      setTimeout(() => {
+        setOpacity(1);
+        setIsTransitioning(false);
+      }, 50);
+    }, 350);
+  };
+
+  const handlePrevious = () => {
+    const newIndex = (currentImageIndex - 1 + heroImages.length) % heroImages.length;
+    changeImage(newIndex);
+  };
+
+  const handleNext = () => {
+    const newIndex = (currentImageIndex + 1) % heroImages.length;
+    changeImage(newIndex);
+  };
 
   const formatNumber = (num: number): string => {
     return num.toString().padStart(2, '0');
@@ -82,8 +124,18 @@ export default function Hero() {
       {/* Carrusel Hero Automático */}
       <div className="bg-[#F9F7F2] border-b-2 border-black">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-          <div className="relative w-full max-w-full mx-auto bg-white border-2 border-black flex items-center justify-center">
-            <div className="relative w-full" style={{ maxWidth: '100%' }}>
+          <div className="relative w-full max-w-full mx-auto bg-white border-2 border-black flex items-center justify-center gap-4">
+            {/* Flecha Izquierda */}
+            <button
+              onClick={handlePrevious}
+              className="w-16 h-16 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+              aria-label="Foto anterior"
+            >
+              <span className="font-sans font-black text-4xl text-black hover:text-white">‹</span>
+            </button>
+
+            {/* Contenedor de Imagen */}
+            <div className="relative w-full flex-1" style={{ maxWidth: '100%' }}>
               <Image
                 key={currentImageIndex}
                 src={heroImages[currentImageIndex]}
@@ -91,10 +143,20 @@ export default function Hero() {
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="w-full h-auto object-contain transition-opacity duration-1000"
+                className="w-full h-auto object-contain transition-opacity duration-700 ease-in-out"
+                style={{ opacity }}
                 priority={currentImageIndex === 0}
               />
             </div>
+
+            {/* Flecha Derecha */}
+            <button
+              onClick={handleNext}
+              className="w-16 h-16 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+              aria-label="Foto siguiente"
+            >
+              <span className="font-sans font-black text-4xl text-black hover:text-white">›</span>
+            </button>
           </div>
         </div>
       </div>

@@ -7,14 +7,20 @@ import Hero from './components/Hero';
 import Location from './components/Location';
 import RSVP from './components/RSVP';
 import GiftRegistry from './components/GiftRegistry';
+import DressCode from './components/DressCode';
 import MusicPlayer from './components/MusicPlayer';
+import AudioControl from './components/AudioControl';
 
 export default function Home() {
   const [hasAccess, setHasAccess] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showEnvelope, setShowEnvelope] = useState(false);
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
+  const [shouldStartMusic, setShouldStartMusic] = useState(false);
 
   const handleSealClick = () => {
+    // Iniciar música cuando se hace clic en "Abrir"
+    setShouldStartMusic(true);
     // Después de que se abre el sobre, mostrar el formulario de acceso
     setTimeout(() => {
       setShowIntro(false);
@@ -41,10 +47,13 @@ export default function Home() {
       <Location />
       <RSVP />
       <GiftRegistry />
-      {/* MusicPlayer - Descomentar y configurar con tu playlist/video de YouTube */}
-      {/* <MusicPlayer playlistId="TU_PLAYLIST_ID_AQUI" /> */}
-      {/* O para un video único: */}
-      {/* <MusicPlayer videoId="TU_VIDEO_ID_AQUI" /> */}
+      <DressCode />
+      {/* Control de Audio */}
+      <AudioControl onMuteChange={setIsAudioMuted} />
+      {/* MusicPlayer - Configurado con el video de YouTube */}
+      {shouldStartMusic && (
+        <MusicPlayer videoId="ByfFurjQDb0" isMuted={isAudioMuted} />
+      )}
     </main>
   );
 }

@@ -44,8 +44,29 @@ export default function GiftRegistry() {
   
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const scrollAmount = 320; // Ancho aproximado de una tarjeta + gap
+      // Calcular el ancho de la tarjeta según el breakpoint
+      let cardWidth: number;
+      let gap: number;
+      
+      if (window.innerWidth >= 1024) {
+        // lg: w-72 (288px)
+        cardWidth = 288;
+        gap = 24; // gap-6
+      } else if (window.innerWidth >= 768) {
+        // md: w-64 (256px)
+        cardWidth = 256;
+        gap = 24; // gap-6
+      } else {
+        // móvil: w-[80vw]
+        cardWidth = window.innerWidth * 0.8;
+        gap = 12; // gap-3
+      }
+      
+      // En desktop: pasar de a 2 tarjetas, en móvil: pasar de a 1 tarjeta
+      const cardsToScroll = window.innerWidth >= 768 ? 2 : 1;
+      const scrollAmount = (cardWidth + gap) * cardsToScroll;
       const scrollDirection = direction === 'left' ? -scrollAmount : scrollAmount;
+      
       carouselRef.current.scrollBy({
         left: scrollDirection,
         behavior: 'smooth',
@@ -65,31 +86,32 @@ export default function GiftRegistry() {
           </p>
         </div>
         
-        {/* Carrusel de Regalos / Grid Móvil */}
-        <div className="relative flex items-center gap-4">
-          {/* Flecha Izquierda - Solo visible en desktop */}
+        {/* Carrusel de Regalos */}
+        <div className="relative flex items-center gap-2 md:gap-4">
+          {/* Flecha Izquierda - Visible en todos los tamaños */}
           <button
             onClick={() => scrollCarousel('left')}
-            className="hidden md:flex w-16 h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+            className="flex w-12 h-12 md:w-16 md:h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
             aria-label="Anterior"
           >
-            <span className="font-sans font-black text-4xl text-black hover:text-white">‹</span>
+            <span className="font-sans font-black text-3xl md:text-4xl text-black hover:text-white">‹</span>
           </button>
           
-          {/* Contenedor: Grid en móvil, Carrusel en desktop */}
+          {/* Contenedor: Carrusel en todos los tamaños */}
           <div
             ref={carouselRef}
-            className="flex-1 grid grid-cols-2 gap-3 md:flex md:overflow-x-auto md:scrollbar-hide md:gap-6 md:snap-x md:snap-mandatory md:scroll-smooth md:touch-pan-x"
+            className="flex-1 flex overflow-x-auto scrollbar-hide gap-3 md:gap-6 snap-x snap-mandatory scroll-smooth touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               touchAction: 'pan-x',
+              scrollBehavior: 'smooth',
             }}
           >
             {gifts.map((gift) => (
               <div
                 key={gift.id}
-                className="w-full md:flex-shrink-0 md:w-64 lg:w-72 md:snap-start"
+                className="flex-shrink-0 w-[80vw] md:w-64 lg:w-72 snap-start"
               >
                 {/* Tarjeta Portrait */}
                 <div className="bg-white border-2 border-black overflow-hidden md:hover:opacity-90 transition-opacity h-full flex flex-col">
@@ -127,13 +149,13 @@ export default function GiftRegistry() {
             ))}
           </div>
           
-          {/* Flecha Derecha - Solo visible en desktop */}
+          {/* Flecha Derecha - Visible en todos los tamaños */}
           <button
             onClick={() => scrollCarousel('right')}
-            className="hidden md:flex w-16 h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
+            className="flex w-12 h-12 md:w-16 md:h-16 items-center justify-center bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
             aria-label="Siguiente"
           >
-            <span className="font-sans font-black text-4xl text-black hover:text-white">›</span>
+            <span className="font-sans font-black text-3xl md:text-4xl text-black hover:text-white">›</span>
           </button>
         </div>
       </div>
