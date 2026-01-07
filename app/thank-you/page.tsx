@@ -17,11 +17,11 @@ export default function ThankYouPage() {
           {/* Mensaje de Agradecimiento */}
           <div className="space-y-6 md:space-y-8 mb-8 md:mb-12">
             <p className="font-sans text-base md:text-lg lg:text-xl leading-relaxed tracking-wide text-black text-center">
-              Agradecemos profundamente tu generoso detalle. Tu gesto significa mucho para nosotros y nos llena de alegría saber que compartirás este momento tan especial en nuestras vidas.
+              Gracias por hacer parte de esta historia. Tu generoso detalle significa mucho para nosotros y nos llena de alegría saber que compartirás este momento tan especial en nuestras vidas.
             </p>
             
             <p className="font-sans text-base md:text-lg lg:text-xl leading-relaxed tracking-wide text-black text-center">
-              Esperamos con gran ilusión vernos ese día y disfrutar de tu valiosa compañía. Tu presencia es el mejor regalo que podríamos recibir.
+              Recuerda que nos vemos el 17 de Mayo muy puntuales para disfrutar de tu compañía juntos. Tu presencia es el mejor regalo que podríamos recibir.
             </p>
           </div>
 
@@ -34,6 +34,9 @@ export default function ThankYouPage() {
                 </p>
                 <p className="font-sans text-lg md:text-xl lg:text-2xl font-black uppercase tracking-wide text-black">
                   {weddingDate}
+                </p>
+                <p className="font-sans text-base md:text-lg lg:text-xl font-normal uppercase tracking-wide text-black mt-2">
+                  3:00 PM
                 </p>
               </div>
               

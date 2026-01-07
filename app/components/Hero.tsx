@@ -125,6 +125,9 @@ export default function Hero() {
                   <p className="font-serif text-base md:text-lg uppercase tracking-widest font-bold text-white">
                     17 DE MAYO DE 2026
                   </p>
+                  <p className="font-serif text-base md:text-lg uppercase tracking-widest font-normal text-white mt-1">
+                    3:00 PM
+                  </p>
                 </div>
               </div>
             </div>
