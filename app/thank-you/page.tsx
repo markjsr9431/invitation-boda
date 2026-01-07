@@ -21,7 +21,7 @@ export default function ThankYouPage() {
             </p>
             
             <p className="font-sans text-base md:text-lg lg:text-xl leading-relaxed tracking-wide text-black text-center">
-              Recuerda que nos vemos el 17 de Mayo muy puntuales para disfrutar de tu compañía juntos. Tu presencia es el mejor regalo que podríamos recibir.
+              Recuerda que nos vemos el 17 de Mayo, muy puntuales para disfrutar de tu compañía juntos. Tu presencia es el mejor regalo que podríamos recibir.
             </p>
           </div>
 
