@@ -190,9 +190,17 @@ export default function GiftRegistry() {
                   DETALLE PARA FELIPE & MARÍA
                 </h3>
                 
-                <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">
-                  ¡Gracias por ser parte de nuestra historia! Para tu comodidad, hemos habilitado un portal seguro para recibir tu detalle.
-                </p>
+                <div className="space-y-4">
+                  <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">
+                    Gracias por elegir este regalo 🤍
+                  </p>
+                  <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">
+                    Tu aporte será usado para que podamos comprar nosotros mismos este regalo y así vivir juntos la experiencia de elegirlo para nuestro hogar.
+                  </p>
+                  <p className="font-sans text-base md:text-lg leading-relaxed text-center text-black">
+                    Agradecemos mucho tu cariño y tu apoyo en esta nueva etapa
+                  </p>
+                </div>
                 
                 <a
                   href={selectedGiftLink}
