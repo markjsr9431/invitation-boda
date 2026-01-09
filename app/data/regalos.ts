@@ -7,7 +7,7 @@ export interface Regalo {
 }
 
 export const REGALOS: Regalo[] = [
-  { id: 1, nombre: "Vajilla de 4 puestos blanca Corel", precio: "$304.000", link: "https://mpago.li/23jPdDv", image: "/imagenes regalos/1.jpeg" },
+  { id: 1, nombre: "Vajilla de 4 puestos blanca Corelle", precio: "$304.000", link: "https://mpago.li/23jPdDv", image: "/imagenes regalos/1.jpeg" },
   { id: 2, nombre: "Set paños de limpiones", precio: "$30.500", link: "https://mpago.li/23QGjXv", image: "/imagenes regalos/2.jpeg" },
   { id: 3, nombre: "Juego de ollas", precio: "$406.000", link: "https://mpago.li/2aqt3iG", image: "/imagenes regalos/3.jpeg" },
   { id: 4, nombre: "Juego de sartenes", precio: "$167.000", link: "https://mpago.li/2YA6arp", image: "/imagenes regalos/4.jpeg" },

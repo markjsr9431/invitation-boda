@@ -5,10 +5,16 @@ import { calculateTimeRemaining, TimeRemaining } from '@/app/utils/countdown';
 import Image from 'next/image';
 
 const heroImages = [
-  '/IMG_2141.PNG',
-  '/IMG_4392.JPG',
-  '/IMG_4404.JPG',
-  '/IMG_9536.JPG',
+  '/carrusel fotos/1.jpg',
+  '/carrusel fotos/2.jpg',
+  '/carrusel fotos/3.jpg',
+  '/carrusel fotos/4.jpg',
+  '/carrusel fotos/5.jpg',
+  '/carrusel fotos/6.jpg',
+  '/carrusel fotos/7.jpg',
+  '/carrusel fotos/8.jpg',
+  '/carrusel fotos/9.jpg',
+  '/carrusel fotos/10.JPG',
 ];
 
 export default function Hero() {
@@ -198,44 +204,48 @@ export default function Hero() {
       </div>
 
       {/* Carrusel Hero Automático */}
-      <div className="bg-[#F9F7F2] border-b-2 border-black">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-          <div className="relative w-full max-w-full mx-auto bg-white border-2 border-black flex items-center justify-center gap-4">
-            {/* Flecha Izquierda */}
-            <button
-              onClick={handlePrevious}
-              className="w-16 h-16 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
-              aria-label="Foto anterior"
-            >
-              <span className="font-sans font-black text-4xl text-black hover:text-white">‹</span>
-            </button>
+<div className="bg-[#F9F7F2] border-b-2 border-black">
+  <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+    <div className="group relative w-full max-w-full mx-auto bg-white border border-stone-200 flex items-center justify-center gap-4">
+      
+      {/* Flecha Izquierda */}
+      <button
+        onClick={handlePrevious}
+        className="absolute left-2 md:left-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center hover:bg-white/80 transition-all duration-300 flex-shrink-0 z-20 opacity-30 md:opacity-0 md:group-hover:opacity-100"
+        aria-label="Foto anterior"
+      >
+        <span className="font-sans font-black text-lg md:text-xl text-black">‹</span>
+      </button>
 
-            {/* Contenedor de Imagen */}
-            <div className="relative w-full flex-1" style={{ maxWidth: '100%' }}>
-              <Image
-                key={currentImageIndex}
-                src={heroImages[currentImageIndex]}
-                alt="Felipe y María"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="w-full h-auto object-contain transition-opacity duration-700 ease-in-out"
-                style={{ opacity }}
-                priority={currentImageIndex === 0}
-              />
-            </div>
-
-            {/* Flecha Derecha */}
-            <button
-              onClick={handleNext}
-              className="w-16 h-16 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 flex-shrink-0 z-10"
-              aria-label="Foto siguiente"
-            >
-              <span className="font-sans font-black text-4xl text-black hover:text-white">›</span>
-            </button>
-          </div>
-        </div>
+      {/* NUEVO CONTENEDOR DE IMAGEN (Optimizado) */}
+      <div className="relative w-full flex-1 aspect-[4/5] md:aspect-video overflow-hidden">
+        {heroImages.map((src, index) => (
+          <Image
+            key={src}
+            src={src}
+            alt={`Felipe y María ${index + 1}`}
+            fill
+            className={`object-contain transition-opacity duration-700 ease-in-out ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            priority={index <= 1} // Precarga las primeras para evitar el lag
+            sizes="(max-width: 768px) 100vw, 80vw"
+          />
+        ))}
       </div>
+
+      {/* Flecha Derecha */}
+      <button
+        onClick={handleNext}
+        className="absolute right-2 md:right-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center hover:bg-white/80 transition-all duration-300 flex-shrink-0 z-20 opacity-30 md:opacity-0 md:group-hover:opacity-100"
+        aria-label="Foto siguiente"
+      >
+        <span className="font-sans font-black text-lg md:text-xl text-black">›</span>
+      </button>
+
+    </div>
+  </div>
+</div>
     </section>
   );
 }
