@@ -92,7 +92,7 @@ export default function Hero() {
         {/* Imagen de fondo que cubre hasta el counter */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/IMG_4392.JPG"
+            src="/7.jpg"
             alt="Fondo Hero"
             fill
             className="object-cover object-center"
