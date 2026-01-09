@@ -7,9 +7,9 @@ export default function RSVP() {
     <section className="py-16 md:py-24 px-4 bg-[#F9F7F2] border-b-2 border-black">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white border-2 border-black p-8 md:p-12 mb-12">
-          <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-widest text-black">
-            CONFIRMACIÓN DE ASISTENCIA
-          </h2>
+        <h2 className="font-sans text-[min(8vw,2.25rem)] md:text-5xl lg:text-6xl font-black text-center mb-4 uppercase tracking-widest text-black leading-tight">
+  CONFIRMACIÓN DE ASISTENCIA
+</h2>
         </div>
 
         <div className="bg-white border-2 border-black p-8 md:p-12 text-center">
