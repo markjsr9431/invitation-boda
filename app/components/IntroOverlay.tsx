@@ -23,7 +23,7 @@ export default function IntroOverlay({ onSealClick }: IntroOverlayProps) {
       {/* 1. Cambio aquí: Usamos inset-0 para que el contenedor sea TODA la pantalla */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/portada0.png"
+          src="/portada.png"
           alt="Portada"
           fill
           /* 2. Cambio aquí: object-cover quita los bordes blancos y llena el celular */
