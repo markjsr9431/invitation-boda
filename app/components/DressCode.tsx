@@ -79,15 +79,13 @@ export default function DressCode() {
             {/* Contenido del Modal */}
             <div className="space-y-4 pt-2">
               {/* Imagen */}
-              <div className="relative w-full">
+              <div className="relative w-full h-[60vh] bg-white overflow-hidden flex items-center justify-center">
                 <Image
                   src={isModalOpen === 'hombres' ? hombresImage : mujeresImage}
                   alt={`Código de vestimenta para ${isModalOpen === 'hombres' ? 'hombres' : 'mujeres'}`}
-                  width={0}
-                  height={0}
+                  fill
                   sizes="100vw"
-                  className="w-full h-auto"
-                  style={{ width: '100%', height: 'auto' }}
+                  className="object-contain"
                 />
               </div>
 

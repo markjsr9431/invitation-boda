@@ -1,14 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import IntroOverlay from './components/IntroOverlay';
 import Envelope from './components/Envelope';
 import Hero from './components/Hero';
-import Location from './components/Location';
-import RSVP from './components/RSVP';
-import GiftRegistry from './components/GiftRegistry';
 import DressCode from './components/DressCode';
 import MusicPlayer from './components/MusicPlayer';
+import LazySection from './components/LazySection';
+
+// Lazy load components que están debajo del fold - solo se cargan cuando el usuario hace scroll hacia ellos
+const Location = dynamic(() => import('./components/Location'), {
+  ssr: false,
+});
+
+const RSVP = dynamic(() => import('./components/RSVP'), {
+  ssr: false,
+});
+
+const GiftRegistry = dynamic(() => import('./components/GiftRegistry'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -43,10 +55,16 @@ export default function Home() {
       {hasAccess && (
         <main className="min-h-screen bg-[#F9F7F2]">
           <Hero />
-          <Location />
-          <RSVP />
+          <LazySection>
+            <Location />
+          </LazySection>
+          <LazySection>
+            <RSVP />
+          </LazySection>
           <DressCode />
-          <GiftRegistry />
+          <LazySection>
+            <GiftRegistry />
+          </LazySection>
         </main>
       )}
     </>

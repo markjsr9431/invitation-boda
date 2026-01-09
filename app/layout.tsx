@@ -4,21 +4,21 @@ import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['400', '700'],
   variable: '--font-montserrat',
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['400'],
   variable: '--font-inter',
   display: 'swap',
 });
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '700'],
   variable: '--font-serif',
   display: 'swap',
 });
@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${montserrat.variable} ${inter.variable} ${playfairDisplay.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased font-sans">{children}</body>
     </html>
   );
 }
