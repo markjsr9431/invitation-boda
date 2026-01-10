@@ -52,14 +52,14 @@ export default function IntroOverlay({ onSealClick }: IntroOverlayProps) {
   onClick={handleClick}
   className={`absolute z-10 cursor-pointer ${isExiting ? 'animate-fade-out' : ''}`}
   style={{
-    left: '50%', // Cambiado a 50% para que el translate(-50%) lo deje exacto
-    top: '78%',
+    left: '48%', // Cambiado a 50% para que el translate(-50%) lo deje exacto
+    top: '85%',
     transform: 'translate(-50%, -50%)',
   }}
   aria-label="Abrir invitación"
   disabled={isExiting}
 >
-  <span className="text-white font-serif font-bold text-xs md:text-sm tracking-[0.4em] drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)] animate-pulse hover:scale-110 transition-all">
+  <span className="text-white font-serif font-bold text-xs md:text-sm tracking-[0.1em] drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)] animate-pulse hover:scale-110 transition-all">
     ABRIR
   </span>
 </button>

@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import IntroOverlay from './components/IntroOverlay';
 import Envelope from './components/Envelope';
 import Hero from './components/Hero';
 import DressCode from './components/DressCode';
-import MusicPlayer from './components/MusicPlayer';
+import MusicPlayer, { MusicPlayerRef } from './components/MusicPlayer';
 import LazySection from './components/LazySection';
 
 // Lazy load components que están debajo del fold - solo se cargan cuando el usuario hace scroll hacia ellos
@@ -26,11 +26,12 @@ export default function Home() {
   const [hasAccess, setHasAccess] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showEnvelope, setShowEnvelope] = useState(false);
-  const [isMusicMuted, setIsMusicMuted] = useState(true);
+  const [isMusicMuted, setIsMusicMuted] = useState(false);
+  const musicPlayerRef = useRef<MusicPlayerRef>(null);
 
   const handleSealClick = () => {
-    // Desmutear la música cuando se hace clic en "Abrir"
-    setIsMusicMuted(false);
+    // Reproducir la música cuando se hace clic en "Abrir"
+    musicPlayerRef.current?.play();
     // Después de que se abre el sobre, mostrar el formulario de acceso
     setTimeout(() => {
       setShowIntro(false);
@@ -45,8 +46,8 @@ export default function Home() {
 
   return (
     <>
-      {/* MusicPlayer - Precargado desde el inicio pero silenciado hasta hacer clic en "Abrir" */}
-      <MusicPlayer videoId="ByfFurjQDb0" isMuted={isMusicMuted} />
+      {/* MusicPlayer - Se reproduce cuando se hace clic en "Abrir" */}
+      <MusicPlayer ref={musicPlayerRef} isMuted={isMusicMuted} />
       
       {showIntro && <IntroOverlay onSealClick={handleSealClick} />}
       

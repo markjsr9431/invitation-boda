@@ -1,114 +1,133 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 
 interface MusicPlayerProps {
-  playlistId?: string;
-  videoId?: string;
   isMuted?: boolean;
 }
 
-export default function MusicPlayer({ playlistId, videoId, isMuted: externalMuted }: MusicPlayerProps) {
-  // Inicializar con el valor externo si está disponible, sino false
-  const [isMuted, setIsMuted] = useState(externalMuted !== undefined ? externalMuted : false);
-  const [isVisible, setIsVisible] = useState(true);
-
-  // Sincronizar con el estado externo si se proporciona
-  useEffect(() => {
-    if (externalMuted !== undefined) {
-      setIsMuted(externalMuted);
-    }
-  }, [externalMuted]);
-
-  // Si no se proporciona playlistId ni videoId, usar valores por defecto
-  // El usuario deberá reemplazar estos con su playlist/video de YouTube
-  const defaultPlaylistId = playlistId || 'PL_DEFAULT_PLAYLIST_ID';
-  const defaultVideoId = videoId || 'dQw4w9WgXcQ'; // Video de ejemplo - reemplazar
-
-  // Construir la URL del iframe
-  // Para playlist: usar playlist=PLAYLIST_ID
-  // Para video único: usar el videoId directamente
-  const embedUrl = playlistId
-    ? `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&loop=1&mute=${isMuted ? 1 : 0}&controls=0&modestbranding=1&rel=0`
-    : `https://www.youtube.com/embed/${videoId || defaultVideoId}?autoplay=1&loop=1&playlist=${videoId || defaultVideoId}&mute=${isMuted ? 1 : 0}&controls=0&modestbranding=1&rel=0`;
-
-  // Actualizar el iframe cuando cambie el estado de mute o el videoId
-  useEffect(() => {
-    const iframe = document.getElementById('youtube-player') as HTMLIFrameElement;
-    if (iframe && embedUrl) {
-      iframe.src = embedUrl;
-    }
-  }, [isMuted, embedUrl, videoId, playlistId]);
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
-
-  if (!isVisible) {
-    return (
-      <button
-        onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 right-4 w-12 h-12 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 z-50"
-        aria-label="Mostrar reproductor de música"
-      >
-        <span className="font-sans font-black text-xl">♪</span>
-      </button>
-    );
-  }
-
-  return (
-    <>
-      {/* Iframe de YouTube (oculto pero activo, fuera de la pantalla) */}
-      <div style={{ 
-        position: 'fixed', 
-        left: '-9999px', 
-        top: '-9999px',
-        width: '1px', 
-        height: '1px', 
-        overflow: 'hidden',
-        zIndex: -1
-      }}>
-        <iframe
-          id="youtube-player"
-          width="1"
-          height="1"
-          src={embedUrl}
-          title="Música de fondo"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          style={{ 
-            opacity: 0, 
-            pointerEvents: 'none',
-            border: 'none'
-          }}
-        />
-      </div>
-
-      <div className="fixed bottom-4 right-4 z-50">
-        {/* Contenedor del reproductor */}
-        <div className="bg-white border-2 border-black p-2 flex flex-col gap-2">
-          {/* Controles */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleMute}
-              className="w-10 h-10 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
-              aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
-            >
-              <span className="font-sans font-black text-lg">
-                {isMuted ? '🔇' : '🔊'}
-              </span>
-            </button>
-            <button
-              onClick={() => setIsVisible(false)}
-              className="w-10 h-10 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
-              aria-label="Ocultar reproductor"
-            >
-              <span className="font-sans font-black text-lg">×</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+export interface MusicPlayerRef {
+  play: () => void;
 }
 
+const MusicPlayer = forwardRef<MusicPlayerRef, MusicPlayerProps>(
+  ({ isMuted: externalMuted }, ref) => {
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const [isMuted, setIsMuted] = useState(externalMuted !== undefined ? externalMuted : false);
+    const fadeIntervalRef = useRef<number | null>(null);
+
+    // Sincronizar con el estado externo si se proporciona
+    useEffect(() => {
+      if (externalMuted !== undefined) {
+        setIsMuted(externalMuted);
+      }
+    }, [externalMuted]);
+
+    // Sincronizar el volumen con el estado de mute
+    useEffect(() => {
+      if (audioRef.current) {
+        audioRef.current.muted = isMuted;
+      }
+    }, [isMuted]);
+
+    // Limpiar intervalos al desmontar
+    useEffect(() => {
+      return () => {
+        if (fadeIntervalRef.current !== null) {
+          window.clearInterval(fadeIntervalRef.current);
+        }
+      };
+    }, []);
+
+    // Exponer el método play mediante useImperativeHandle
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        // Asegurar que el volumen inicial esté en 0
+        audio.volume = 0;
+
+        // Intentar reproducir el audio
+        const playPromise = audio.play();
+
+        // Manejar la promesa con catch para evitar errores que congelen la aplicación
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Fade-in gradual: aumentar volumen de 0 a 1 en 1 segundo
+              const fadeDuration = 1000; // 1 segundo en milisegundos
+              const fadeSteps = 50; // Número de pasos para una transición suave
+              const stepDuration = fadeDuration / fadeSteps;
+              const volumeStep = 1 / fadeSteps;
+
+              let currentStep = 0;
+
+              // Limpiar cualquier intervalo anterior
+              if (fadeIntervalRef.current) {
+                clearInterval(fadeIntervalRef.current);
+              }
+
+              fadeIntervalRef.current = window.setInterval(() => {
+                currentStep++;
+                const newVolume = Math.min(currentStep * volumeStep, 1);
+
+                if (audio) {
+                  audio.volume = newVolume;
+                }
+
+                // Detener el intervalo cuando llegamos al volumen máximo
+                if (currentStep >= fadeSteps || newVolume >= 1) {
+                  if (audio) {
+                    audio.volume = 1;
+                  }
+                  if (fadeIntervalRef.current !== null) {
+                    window.clearInterval(fadeIntervalRef.current);
+                    fadeIntervalRef.current = null;
+                  }
+                }
+              }, stepDuration);
+            })
+            .catch((error) => {
+              // Manejar errores silenciosamente (conexión lenta, políticas del navegador, etc.)
+              console.warn('No se pudo reproducir el audio:', error);
+            });
+        }
+      },
+    }));
+
+    const toggleMute = () => {
+      setIsMuted(!isMuted);
+    };
+
+    return (
+      <>
+        {/* Elemento audio oculto */}
+        <audio
+          ref={audioRef}
+          src="/backgroundmusic/backgroundmusic.mp3"
+          loop
+          preload="auto"
+          style={{ display: 'none' }}
+        />
+
+        {/* Botón flotante de mute/unmute */}
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            onClick={toggleMute}
+            className="w-12 h-12 bg-white/90 border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 shadow-lg"
+            aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
+          >
+            <span className="font-sans font-black text-lg">
+              {isMuted ? '🔇' : '🔊'}
+            </span>
+          </button>
+        </div>
+      </>
+    );
+  }
+);
+
+MusicPlayer.displayName = 'MusicPlayer';
+
+export default MusicPlayer;
